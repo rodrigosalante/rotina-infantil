@@ -1,6 +1,7 @@
 {
   "name": "Rotina Mágica ✨",
   "short_name": "Rotina Mágica",
+  "description": "App Rotina Mágica para organizar atividades diárias",
   "start_url": ".",
   "display": "fullscreen",
   "background_color": "#1a0533",
