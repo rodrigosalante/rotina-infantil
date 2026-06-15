@@ -54,6 +54,12 @@ if ('serviceWorker' in navigator) {
         self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
     `));
 }
+
+    <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/rotina-infantil/service-worker.js');
+}
+</script>
 </script>
 
 </body>
