@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#7c5cbf">
     <title>Rotina Mágica ✨</title>
 
-    <!-- PWA Manifest Otimizado para APK -->
+    <!-- PWA Manifest -->
     <link rel="manifest" href="data:application/manifest+json,{
         &quot;name&quot;:&quot;Rotina Mágica ✨&quot;,
         &quot;short_name&quot;:&quot;Rotina Mágica&quot;,
@@ -32,62 +32,72 @@
         *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
         html,body{height:100%;overflow:hidden;background:#1a0533}
         body{font-family:'Nunito',sans-serif}
-        :root{--purple:#7c5cbf;--yellow:#FFD93D}
-        #app{max-width:430px;margin:0 auto;height:100vh;background:linear-gradient(180deg,#f0f7ff,#faf5ff);display:flex;flex-direction:column;overflow:hidden}
-        .screen{display:none;flex-direction:column;height:100%}
+
+        :root{
+          --sky:#6BC5F8;--sun:#FFD93D;--pink:#FF6B9D;--purple:#7c5cbf;
+          --green:#2ECC71;--orange:#FF8C42;--mint:#00D2A0;--dark:#1e1245;
+        }
+
+        #app{width:100%;max-width:430px;margin:0 auto;height:100vh;background:linear-gradient(180deg,#f0f7ff 0%,#faf5ff 100%);position:relative;display:flex;flex-direction:column;overflow:hidden}
+        .screen{display:none;flex-direction:column;height:100%;overflow-y:auto}
         .screen.active{display:flex}
-        .routine-card{background:white;border-radius:20px;padding:15px;margin:10px;box-shadow:0 4px 15px rgba(0,0,0,0.1);display:flex;gap:15px;align-items:center}
-        button{padding:12px 20px;border:none;border-radius:50px;font-weight:700;cursor:pointer}
+        .routine-card{background:white;border-radius:20px;padding:15px;margin:10px 15px;box-shadow:0 4px 15px rgba(0,0,0,0.1);display:flex;gap:15px;align-items:center;cursor:pointer}
+        .timer-screen{background:#1e1245;color:white;align-items:center;justify-content:center;text-align:center;padding:20px}
     </style>
 </head>
 <body>
 
 <div id="app">
-    <!-- Tela de Configuração Inicial -->
-    <div class="screen active" id="screen-setup">
-        <h1 style="text-align:center;color:white;background:#7c5cbf;padding:40px 20px">🐭 Rotina Mágica</h1>
-        <div style="padding:20px">
-            <input id="setup-name" placeholder="Nome da criança" style="width:100%;padding:15px;font-size:18px;border-radius:12px;border:2px solid #ddd">
-            <button onclick="startApp()" style="width:100%;margin-top:20px;background:#7c5cbf;color:white">Começar!</button>
-        </div>
-    </div>
 
-    <!-- Tela Principal -->
-    <div class="screen" id="screen-home">
-        <header style="background:#7c5cbf;color:white;padding:15px;text-align:center">
-            <h2 id="child-name">Rotina da Sofia 🐭</h2>
-            <div id="clock" style="font-size:2.5em;font-weight:bold"></div>
-        </header>
-        <div style="padding:15px;flex:1;overflow:auto" id="routines-list"></div>
-        <button onclick="addRoutine()" style="position:fixed;bottom:80px;right:20px;width:60px;height:60px;border-radius:50%;background:#FFD93D;font-size:30px">＋</button>
+  <!-- Tela de Setup -->
+  <div class="screen active" id="screen-setup">
+    <div style="background:linear-gradient(135deg,#6c3fc9,#ec4899);padding:60px 20px;text-align:center;color:white;flex:1">
+      <div style="font-size:80px;margin-bottom:20px">🐭</div>
+      <h1 style="font-size:2.2rem">Rotina Mágica</h1>
+      <p style="margin:20px 0">Vamos criar a rotina da sua criança?</p>
+      <input id="setup-name" placeholder="Nome da criança (ex: Sofia)" style="width:100%;max-width:320px;padding:15px;font-size:18px;border-radius:12px;border:none;margin:20px 0">
+      <button onclick="startApp()" style="width:100%;max-width:320px;padding:18px;background:#FFD93D;color:#3d2000;font-size:18px;font-weight:900;border:none;border-radius:50px">Começar Aventura! 🚀</button>
     </div>
+  </div>
 
-    <!-- Timer -->
-    <div class="screen" id="screen-timer" style="background:#1e1245;color:white;align-items:center;justify-content:center;text-align:center">
-        <div id="timer-icon" style="font-size:100px;margin:20px"></div>
-        <h2 id="timer-name"></h2>
-        <div id="timer-display" style="font-size:4em;font-weight:bold;margin:20px">15:00</div>
-        <button onclick="toggleTimer()" style="background:#FFD93D;color:black;padding:15px 40px;font-size:20px">▶ Iniciar</button>
-        <button onclick="goTo('screen-home')" style="margin-top:20px">Voltar</button>
-    </div>
+  <!-- Tela Principal -->
+  <div class="screen" id="screen-home">
+    <header style="background:#7c5cbf;color:white;padding:20px;text-align:center">
+      <h2 id="child-name">Rotina da Sofia 🐭</h2>
+      <div id="clock" style="font-size:2.8em;font-weight:900;margin:10px 0"></div>
+    </header>
+    <div style="padding:15px;flex:1;overflow:auto" id="routines-list"></div>
+    <button onclick="addRoutine()" style="position:fixed;bottom:90px;right:20px;width:65px;height:65px;border-radius:50%;background:#FFD93D;font-size:32px;box-shadow:0 4px 15px rgba(0,0,0,0.3)">＋</button>
+  </div>
+
+  <!-- Tela do Timer -->
+  <div class="screen timer-screen" id="screen-timer">
+    <button onclick="goTo('screen-home')" style="position:absolute;top:20px;left:20px;background:none;border:none;font-size:30px;color:white">←</button>
+    <div id="timer-icon" style="font-size:120px;margin:30px 0"></div>
+    <h2 id="timer-name" style="margin:10px"></h2>
+    <div id="timer-display" style="font-size:5em;font-weight:900;margin:20px 0">15:00</div>
+    <button onclick="toggleTimer()" id="timer-btn" style="padding:18px 50px;background:#FFD93D;color:#3d2000;font-size:20px;font-weight:900;border:none;border-radius:50px">▶ Iniciar</button>
+  </div>
 </div>
 
 <script>
-// Variáveis
+// ==================== DADOS ====================
 let routines = [
     {id:1, name:"Acordar", icon:"🌅", time:"07:00", duration:10, done:false},
     {id:2, name:"Escovar Dentes", icon:"🦷", time:"07:10", duration:5, done:false},
-    {id:3, name:"Banho", icon:"🚿", time:"07:20", duration:15, done:false},
+    {id:3, name:"Tomar Banho", icon:"🚿", time:"07:20", duration:15, done:false},
     {id:4, name:"Café da Manhã", icon:"🥐", time:"07:40", duration:20, done:false},
-    {id:5, name:"Uniforme", icon:"👕", time:"08:00", duration:10, done:false},
-    {id:6, name:"Escola", icon:"📚", time:"08:20", duration:30, done:false},
-    {id:7, name:"Dormir", icon:"🌙", time:"20:30", duration:15, done:false}
+    {id:5, name:"Vestir Uniforme", icon:"👕", time:"08:00", duration:10, done:false},
+    {id:6, name:"Hora da Escola", icon:"📚", time:"08:20", duration:0, done:false},
+    {id:7, name:"Almoço", icon:"🍎", time:"12:00", duration:25, done:false},
+    {id:8, name:"Dormir", icon:"🌙", time:"20:30", duration:15, done:false}
 ];
 
-let currentTimer = null;
-let timeLeft = 900;
+let timerInterval = null;
+let timeLeft = 0;
+let currentRoutine = null;
 
-// Relógio
+// ==================== RELOGIO ====================
 function updateClock() {
     setInterval(() => {
         const now = new Date();
@@ -95,68 +105,97 @@ function updateClock() {
     }, 1000);
 }
 
-// Renderizar rotinas
+// ==================== RENDER ROTINAS ====================
 function renderRoutines() {
     const container = document.getElementById('routines-list');
     container.innerHTML = routines.map(r => `
         <div class="routine-card" onclick="startRoutine(${r.id})">
-            <span style="font-size:40px">${r.icon}</span>
-            <div>
+            <span style="font-size:45px">${r.icon}</span>
+            <div style="flex:1">
                 <strong>${r.name}</strong><br>
                 <small>${r.time} • ${r.duration} min</small>
             </div>
+            ${r.done ? '<span style="font-size:28px">✅</span>' : ''}
         </div>
     `).join('');
 }
 
 function startRoutine(id) {
-    const routine = routines.find(r => r.id === id);
-    document.getElementById('timer-icon').textContent = routine.icon;
-    document.getElementById('timer-name').textContent = routine.name;
-    timeLeft = routine.duration * 60;
-    document.getElementById('timer-display').textContent = `${routine.duration}:00`;
+    currentRoutine = routines.find(r => r.id === id);
+    if (!currentRoutine) return;
+    
+    document.getElementById('timer-icon').textContent = currentRoutine.icon;
+    document.getElementById('timer-name').textContent = currentRoutine.name;
+    timeLeft = currentRoutine.duration * 60 || 600;
+    updateTimerDisplay();
     goTo('screen-timer');
 }
 
-function toggleTimer() {
-    alert("Timer iniciado! (Versão demo - o completo tem animação do ratinho)");
+function updateTimerDisplay() {
+    const min = Math.floor(timeLeft / 60);
+    const sec = timeLeft % 60;
+    document.getElementById('timer-display').textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
 }
 
-function goTo(screen) {
+function toggleTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById('timer-btn').textContent = '▶ Iniciar';
+    } else {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay();
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                alert("🎉 Parabéns! Atividade concluída! 🐭");
+                if (currentRoutine) currentRoutine.done = true;
+                renderRoutines();
+                goTo('screen-home');
+            }
+        }, 1000);
+        document.getElementById('timer-btn').textContent = '⏸ Pausar';
+    }
+}
+
+function goTo(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(screen).classList.add('active');
+    document.getElementById(screenId).classList.add('active');
 }
 
 function addRoutine() {
     const name = prompt("Nome da nova rotina:");
     if (name) {
-        routines.push({id:Date.now(), name, icon:"⭐", time:"08:00", duration:10, done:false});
+        routines.push({
+            id: Date.now(),
+            name: name,
+            icon: "⭐",
+            time: "08:00",
+            duration: 10,
+            done: false
+        });
         renderRoutines();
     }
 }
 
 function startApp() {
-    const name = document.getElementById('setup-name').value || "Criança";
+    const name = document.getElementById('setup-name').value.trim() || "Criança";
     document.getElementById('child-name').textContent = `Rotina da ${name} 🐭`;
     goTo('screen-home');
+    renderRoutines();
 }
 
-// Inicializar
+// ==================== INICIALIZAÇÃO ====================
 updateClock();
 renderRoutines();
-</script>
 
-<!-- Service Worker Inline para PWA/APK -->
-<script>
+// Service Worker Inline
 if ('serviceWorker' in navigator) {
-    const swCode = `
-        self.addEventListener('install', () => { self.skipWaiting(); });
-        self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
-    `;
-    const blob = new Blob([swCode], { type: 'application/javascript' });
+    const swCode = `self.addEventListener('install',()=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));`;
+    const blob = new Blob([swCode], {type:'application/javascript'});
     navigator.serviceWorker.register(URL.createObjectURL(blob));
 }
 </script>
-
 </body>
 </html>
