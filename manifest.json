@@ -1,0 +1,16 @@
+{
+  "name": "Rotina Mágica",
+  "short_name": "Rotina",
+  "description": "App de rotina diária infantil com cronômetro lúdico",
+  "start_url": "/rotina-infantil/",
+  "scope": "/rotina-infantil/",
+  "display": "standalone",
+  "background_color": "#1a0533",
+  "theme_color": "#7c5cbf",
+  "orientation": "portrait",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
