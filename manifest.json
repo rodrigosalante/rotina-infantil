@@ -1,24 +1,38 @@
 {
-  "name": "Rotina Mágica ✨",
-  "short_name": "Rotina Mágica",
-  "description": "App Rotina Mágica para organizar atividades diárias",
-  "start_url": ".",
-  "display": "fullscreen",
-  "background_color": "#1a0533",
-  "theme_color": "#7c5cbf",
-  "orientation": "portrait",
+  "name": "Rotina Mágica",
+  "short_name": "Rotina",
+  "description": "Aplicativo para organizar e acompanhar a rotina infantil de forma prática",
+  "id": "/rotina-infantil/",
+  "start_url": "/rotina-infantil/",
+  "scope": "/rotina-infantil/",
+  "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay"],
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["education", "kids", "productivity"],
   "icons": [
     {
-      "src": "https://via.placeholder.com/192x192/7c5cbf/ffffff?text=🐭",
+      "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://via.placeholder.com/512x512/7c5cbf/ffffff?text=🐭",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Iniciar Rotina",
+      "short_name": "Iniciar",
+      "url": "/rotina-infantil/?iniciar",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
